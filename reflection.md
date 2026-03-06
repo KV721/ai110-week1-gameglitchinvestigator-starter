@@ -19,7 +19,7 @@ I used Claude Code in agent mode as my AI tool throughout this project. I someti
 
 ## 3. Debugging and testing your fixes
 
-I manually tested using the app and giving edge case inputs. For instance, I tried various difficulty levels, tested the new game button, inputted an out-of-range number, etc. I did not ask AI to design test cases.
+I manually tested using the app and giving edge case inputs. For instance, I tried various difficulty levels, tested the new game button, inputted an out-of-range number, etc. I also added few testcases with the help of Claude in the test folder. I used `pytest` to test them, and they were successful.
 
 
 ---
