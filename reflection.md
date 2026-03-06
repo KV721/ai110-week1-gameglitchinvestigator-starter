@@ -4,40 +4,30 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
 
 ## 1. What was broken when you started?
 
-- What did the game look like the first time you ran it?
-- List at least two concrete bugs you noticed at the start  
-  (for example: "the secret number kept changing" or "the hints were backwards").
+- The hints were wrong
+- New Game button is not allowing user to play a new game
+- Accepts numbers not in the range 1-100
+- Difficulty levels are wrong
 
 ---
 
 ## 2. How did you use AI as a teammate?
 
-- Which AI tools did you use on this project (for example: ChatGPT, Gemini, Copilot)?
-- Give one example of an AI suggestion that was correct (including what the AI suggested and how you verified the result).
-- Give one example of an AI suggestion that was incorrect or misleading (including what the AI suggested and how you verified the result).
+I used Claude Code in agent mode as my AI tool throughout this project. I sometimes asked to explain lines of code that didn't make sense and other times I was talking to it about how to fix it. One example of an incorrect AI suggestion: Claude first reset 'attempts' to '1' in the New Game button, which looked correct but was itself a bug causing the attempts counter to be off by one from the start. I caught it by asking Claude to do a code review of other function, which exposed the inconsistency.
 
 ---
 
 ## 3. Debugging and testing your fixes
 
-- How did you decide whether a bug was really fixed?
-- Describe at least one test you ran (manual or using pytest)  
-  and what it showed you about your code.
-- Did AI help you design or understand any tests? How?
-
+I manually tested using the app and giving edge case inputs. For instance, I tried various difficulty levels, tested the new game button, inputted an out-of-range number, etc. I did not ask AI to design test cases.
 ---
 
 ## 4. What did you learn about Streamlit and state?
 
-- In your own words, explain why the secret number kept changing in the original app.
-- How would you explain Streamlit "reruns" and session state to a friend who has never used Streamlit?
-- What change did you make that finally gave the game a stable secret number?
+The secret number was not stable in the original app when New Game was clicked because the reset block didn't clear status, score, or history, and used a hardcoded random.randint(1, 100) that ignored the selected difficulty. Streamlit reruns the entire script from top to bottom on every user interaction, so any variable not stored in st.session_state is lost on each rerun. The game keeps a stable secret by only calling 'random.randint' inside an 'if "secret" not in st.session_state' check, so it only generates once per game.
 
 ---
 
 ## 5. Looking ahead: your developer habits
 
-- What is one habit or strategy from this project that you want to reuse in future labs or projects?
-  - This could be a testing habit, a prompting strategy, or a way you used Git.
-- What is one thing you would do differently next time you work with AI on a coding task?
-- In one or two sentences, describe how this project changed the way you think about AI generated code.
+One habit I want to reuse is asking AI to explain what the broken code is doing before asking for a fix, understanding the bug first led to better and more targeted changes. This project changed how I think about AI-generated code: bugs can be subtle and conditional (like the string comparison only triggering every other attempt), so I need to read and question AI output rather than assume it's correct.
