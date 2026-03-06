@@ -29,18 +29,18 @@ It wrote the code, ran away, and now the game is unplayable.
 
 **Bugs found and fixed:**
 
-- **Wrong hints** — `check_guess` had "Go HIGHER!" and "Go LOWER!" swapped, giving the opposite direction every guess.
-- **String comparison glitch** — On even attempts, `secret` was cast to a string before comparison. This caused lexicographic comparison (e.g. `"9" > "50"` is `True`), producing wrong hints and making the game unwinnable half the time.
-- **Out-of-range inputs accepted** — No validation checked whether the guess was within the difficulty range. Added a bounds check that rejects guesses outside `[low, high]` without costing an attempt.
-- **Attempts counter off-by-one** — `attempts` started at `1` instead of `0`, so the "attempts left" display was always one short and the attempt limit was effectively one fewer than configured.
-- **Win scoring off-by-one** — Score calculation used `100 - 10 * (attempt_number + 1)` instead of `100 - 10 * attempt_number`, under-rewarding every win.
-- **"Too High" rewarded wrong guesses** — Every even attempt with a "Too High" result added `+5` points instead of deducting them.
-- **New Game button broken** — Reset `attempts` to `0` (now fixed to match init), used hardcoded `random.randint(1, 100)` ignoring difficulty, and never cleared `score`, `status`, or `history`.
-- **Refactoring** — Moved all logic functions (`get_range_for_difficulty`, `parse_guess`, `check_guess`, `update_score`) from `app.py` into `logic_utils.py` and imported them.
+- **Wrong hints**: `check_guess` had "Go HIGHER!" and "Go LOWER!" swapped, giving the opposite direction every guess.
+- **String comparison glitch**: On even attempts, `secret` was cast to a string before comparison. This caused lexicographic comparison (e.g. `"9" > "50"` is `True`), producing wrong hints and making the game unwinnable half the time.
+- **Out-of-range inputs accepted**: No validation checked whether the guess was within the difficulty range. Added a bounds check that rejects guesses outside `[low, high]` without costing an attempt.
+- **Attempts counter off-by-one**: `attempts` started at `1` instead of `0`, so the "attempts left" display was always one short and the attempt limit was effectively one fewer than configured.
+- **Win scoring off-by-one**: Score calculation used `100 - 10 * (attempt_number + 1)` instead of `100 - 10 * attempt_number`, under-rewarding every win.
+- **"Too High" rewarded wrong guesses**: Every even attempt with a "Too High" result added `+5` points instead of deducting them.
+- **New Game button broken**: Reset `attempts` to `0` (now fixed to match init), used hardcoded `random.randint(1, 100)` ignoring difficulty, and never cleared `score`, `status`, or `history`.
+- **Refactoring**: Moved all logic functions (`get_range_for_difficulty`, `parse_guess`, `check_guess`, `update_score`) from `app.py` into `logic_utils.py` and imported them.
 
 ## 📸 Demo
 
-- ![alt text](image.png)
+ ![alt text](image.png)
 
 ## 🚀 Stretch Features
 
